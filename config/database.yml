@@ -1,0 +1,24 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: seed_visualization_development
+  pool: 5
+  username: Chandler
+  password:
+  host: localhost
+
+# test:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: seed_visualization_test
+#   pool: 5
+#   username: seed_visualization
+#   password:
+
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: seed_visualization_production
+#   pool: 5
+#   username: seed_visualization
+#   password:
