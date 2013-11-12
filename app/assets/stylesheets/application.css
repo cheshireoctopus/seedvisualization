@@ -11,3 +11,26 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+  width: 75%;
+}
+
+svg {
+  border: 1px solid black;
+}
+
+#map_info {
+  position: absolute;
+  border: 1px solid white;
+  background: hsl(120,100%,50%);
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+
+#map_info.hidden {
+  display: none;
+}
+
+

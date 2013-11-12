@@ -1,0 +1,37 @@
+<h1>Accelerators</h1>
+
+<table border=2>
+
+  <thead>
+    <tr>
+      <th>Accelerator</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Companies</th>
+      <th>Exits</th>
+      <th>Funding</th>
+      <th>Average</th>
+      <th>URL</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accelerators.each do |x| %>
+    <tr>
+    <td><%= x.name %></td>
+    <td><%= x.city %></td>
+    <td><%= x.state %></td>
+    <td><%= x.latitude %></td>
+    <td><%= x.longitude %></td>
+    <td><%= x.companies %></td>
+    <td><%= x.exits %></td>
+    <td><%= x.funding %></td>
+    <td><%= x.average %></td>
+    <td><%= x.url %></td>
+    </tr>
+    <% end %>
+  </tbody>
+
+</table>
