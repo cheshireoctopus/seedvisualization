@@ -4,7 +4,7 @@ $(function() {
   svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
   cscale = d3.scale.linear().domain([30803,222813855]).range([0,360]);
   map();
-  setTimeout(function() {showExt();},2000);
+  setTimeout(function() {showExt();},1);
   $('#comp').on('click', showComp);
   $('#avg').on('click', showAvg);
   $('#fnd').on('click', showFnd);
@@ -125,9 +125,6 @@ function showExt() {
     .on("mouseout", function() {
         d3.select(this).style("fill","hsla(225,50%%,50%,0.95)").style("stroke", "white");
         d3.select("#map_info").classed("hidden", true);
-      })
-    .on("click", function(d, i, a) {
-        d3.select(this).transition().duration(1500).style("transform","rotate(-60)");
       })
     .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
     .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
