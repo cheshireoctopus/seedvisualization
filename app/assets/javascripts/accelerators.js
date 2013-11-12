@@ -4,7 +4,7 @@ $(function() {
   svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
   cscale = d3.scale.linear().domain([30803,222813855]).range([0,360]);
   map();
-  setTimeout(function() {showExt();},1000);
+  setTimeout(function() {showExt();},3000);
   $('#comp').on('click', showComp);
   $('#avg').on('click', showAvg);
   $('#fnd').on('click', showFnd);
