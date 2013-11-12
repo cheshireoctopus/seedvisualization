@@ -1,21 +1,22 @@
 $(function() {
-  w = 1100;
+  w = 1200;
   h = 600;
   svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
+  cscale = d3.scale.linear().domain([30803,222813855]).range([0,360]);
   map();
-  setTimeout(function() {showComp();},100);
+  setTimeout(function() {showExt();},100);
   $('#comp').on('click', showComp);
   $('#avg').on('click', showAvg);
   $('#fnd').on('click', showFnd);
   $('#ext').on('click', showExt);
-  cscale = d3.scale.linear().domain([30803,222813855]).range([0,360]);
+  $('svg').css('cursor', 'pointer');
 });
 
 function map() {
       //Define map projection
       projection = d3.geo.albersUsa()
       .scale(1300)
-      .translate([525,310]);
+      .translate([625,310]);
 
       //Define path generator
       path = d3.geo.path()
@@ -32,7 +33,7 @@ function map() {
         .attr("d", path)
         .style('stroke', 'white')
         .style('stroke-width', '1.5')
-        .style("fill", "black");
+        .style("fill", "#black");
       });
 }
 
@@ -117,15 +118,23 @@ function showExt() {
   d3.csv("../data.csv", function(data) {
     svg.selectAll("circle").data(data).enter().append("circle")
     .on("mouseover", function(d) {
+        d3.select(this).style("fill", "white").style("stroke", "hsla(225,50%%,50%,0.95)");
         d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
         d3.select("#map_info").html(d.city+"<br> Exit Valuations: "+"$"+d.ext).classed("hidden", false);
       })
-      .on("mouseout", function() {
+    .on("mouseout", function() {
+        d3.select(this).style("fill","hsla(225,50%%,50%,0.95)").style("stroke", "white");
         d3.select("#map_info").classed("hidden", true);
+      })
+    .on("click", function(d, i, a) {
+        d3.select(this).transition().duration(1500).style("transform","rotate(-60)");
       })
     .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
     .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
-    .style("fill", function(d) {return "hsla("+cscale(d.ext)*100+",50%%,50%,0.95)";})
+    .attr("transform", "translate(0,0)")
+    .style("fill","hsla(225,50%%,50%,0.95)")
+    .style("stroke", "white")
+    .style("stroke-width", "3")
     .transition().duration(1500)
     .attr("r", function(d) {return rscale(d.fnd);});
   });

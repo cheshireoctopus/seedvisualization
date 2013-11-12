@@ -1,6 +1,6 @@
 # Accelerators. Visualized.
 
-Inspired by [ProjectKick](http://projectkick.us) and drawing data from [Seed-DB](http://http://www.seed-db.com/),
+Inspired by [ProjectKick](http://projectkick.us) and drawing data from [Seed-DB](http://www.seed-db.com/),
 this web application provides a visualized undertanding of the top-50 accelerators in the US.
 
 ## Technologies

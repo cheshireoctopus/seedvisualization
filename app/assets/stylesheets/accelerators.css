@@ -1,0 +1,38 @@
+body {
+  width: 85%;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#map_nav {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+
+svg {
+  /*border: 1px solid black;*/
+}
+
+#map_info {
+  position: absolute;
+  border: 1px solid white;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#map_info.hidden {
+  display: none;
+}
