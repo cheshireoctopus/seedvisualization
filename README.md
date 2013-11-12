@@ -8,3 +8,5 @@ this web application provides a visualized undertanding of the top-50 accelerato
 * HTML5/CSS3
 * Javascript + JQuery
 * D3.js
+
+Check it out @ [https://accelvis.herokuapp.com/](https://accelvis.herokuapp.com/).
