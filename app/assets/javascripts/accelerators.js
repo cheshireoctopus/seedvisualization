@@ -15,7 +15,7 @@ $(function() {
 function map() {
       //Define map projection
       projection = d3.geo.albersUsa()
-      .scale(1300)
+      .scale(1200)
       .translate([625,310]);
 
       //Define path generator
@@ -31,9 +31,9 @@ function map() {
         .enter()
         .append("path")
         .attr("d", path)
-        .style('stroke', 'white')
-        .style('stroke-width', '1.5')
-        .style("fill", "#black");
+        .style('stroke', '#eee')
+        .style('stroke-width', '0.5')
+        .style("fill", "rgb(83,83,83)");
       });
 }
 
@@ -118,23 +118,27 @@ function showExt() {
   d3.csv("../data.csv", function(data) {
     svg.selectAll("circle").data(data).enter().append("circle")
     .on("mouseover", function(d) {
-        d3.select(this).style("fill", "white").style("stroke", "hsla(225,50%%,50%,0.95)");
+        d3.select(this).style("stroke", "rgb(71,158,123)");
         d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
         d3.select("#map_info").html(d.city+"<br> Exit Valuations: "+"$"+d.ext).classed("hidden", false);
       })
     .on("mouseout", function() {
-        d3.select(this).style("fill","hsla(225,50%%,50%,0.95)").style("stroke", "white");
+        d3.select(this).style("stroke", "white");
         d3.select("#map_info").classed("hidden", true);
       })
     .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
     .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
     .attr("transform", "translate(0,0)")
-    .style("fill","hsla(225,50%%,50%,0.95)")
+    .style("fill","hsla(170,5%,65%,0.50)")
     .style("stroke", "white")
-    .style("stroke-width", "3")
+    .style("stroke-width", "2")
     .transition().duration(1500)
     .attr("r", function(d) {return rscale(d.fnd);});
   });
   $('.btn').attr("disabled", false);
   $('#ext').attr("disabled", true);
+}
+
+function chart() {
+
 }

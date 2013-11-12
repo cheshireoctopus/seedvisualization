@@ -1,6 +1,9 @@
 body {
   width: 85%;
   margin: auto;
+  background: black;
+  color:white;
+  font-family: helvetica;
 }
 
 h1 {
@@ -20,9 +23,13 @@ h1 {
   margin-bottom: 2%;
 }
 
+#map_div {
+  background: black;
+}
 
 svg {
   /*border: 1px solid black;*/
+  background: black;
 }
 
 #map_info {

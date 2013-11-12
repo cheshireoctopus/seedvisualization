@@ -6,4 +6,7 @@ class AcceleratorsController < ApplicationController
   def table
     @accelerators = Accelerator.all
   end
+
+  def charts
+  end
 end
