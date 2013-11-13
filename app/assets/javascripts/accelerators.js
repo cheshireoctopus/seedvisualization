@@ -47,28 +47,36 @@ function showComp() {
   setTimeout(function() {chartComp();},1050);
   $('#chart').slideDown(1200);
 
+  d3.selectAll($('circle')).transition().duration(350)
+  .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
+  setTimeout(function() {$('circle').remove();},1150);
+
   var rscale = d3.scale.linear().domain([0,750]).range([5,125]);
-  $('circle').remove();
-  d3.csv("data.csv", function(data) {
-      svg.selectAll("circle").data(data).enter().append("circle")
-      .on("mouseover", function(d) {
-        d3.select(this).style("stroke", "rgb(71,158,123)");
-        d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
-        d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Companies: "+d.comp).classed("hidden", false);
-      })
-      .on("mouseout", function() {
-        d3.select(this).style("stroke", "white");
-        d3.select("#map_info").classed("hidden", true);
-      })
-      .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
-      .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
-      .style("fill", "hsla(170, 45%, 65%,0.35)")
-      .style("stroke", "white")
-      .style("stroke-width", "2")
-      .transition()
-      .duration(750)
-      .attr("r", function(d) {return rscale(d.comp);});
-  });
+  setTimeout(function() {
+    d3.csv("data.csv", function(data) {
+        svg.selectAll("circle").data(data).enter().append("circle")
+        .on("mouseover", function(d) {
+          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
+          d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Companies: "+d.comp).classed("hidden", false);
+        })
+        .on("mouseout", function() {
+          d3.select(this).style("stroke", "white");
+          d3.select("#map_info").classed("hidden", true);
+        })
+        .attr("cx",w/1.75).attr("cy",h/2)
+        .attr("r","5")
+        .style("fill", "hsla(170, 45%, 65%,0.35)")
+        .style("stroke", "white")
+        .style("stroke-width", "2")
+        .transition().duration(350).attr("r", function(d) {return rscale(d.comp);})
+        .transition()
+        .duration(350)
+        .delay(350)
+        .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
+        .attr("cy", function(d) {return projection([d.lon, d.lat])[1];});
+    });
+  },1150);
 }
 
 function showAvg() {
@@ -79,10 +87,9 @@ function showAvg() {
   setTimeout(function() {chartAvg();},1050);
   $('#chart').slideDown(1200);
 
-  d3.selectAll($('circle')).transition().duration(500)
-  .attr("cx",w/1.75).attr("cy",h/2).transition().duration(500).delay(550).attr("r","5");
-  // .attr("transform","translate("+w+",0)");
-  // setTimeout(function() {$('circle').remove();},749);
+  d3.selectAll($('circle')).transition().duration(350)
+  .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
+  setTimeout(function() {$('circle').remove();},1150);
   setTimeout(function() {
   var rscale = d3.scale.linear().domain([30803,2813855]).range([5,40]);
   d3.csv("data.csv", function(data) {
@@ -98,16 +105,19 @@ function showAvg() {
           d3.select(this).style("stroke", "white");
           d3.select("#map_info").classed("hidden", true);
         })
-      .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
-      .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
-      .style("fill", "hsla(170, 45%, 65%,0.35)")
-      .style("stroke", "white")
-      .style("stroke-width", "2")
-      .transition()
-      .duration(1500)
-      .attr("r", function(d) {return rscale(d.avg);});
+        .attr("cx",w/1.75).attr("cy",h/2)
+        .attr("r","5")
+        .style("fill", "hsla(170, 45%, 65%,0.35)")
+        .style("stroke", "white")
+        .style("stroke-width", "2")
+        .transition().duration(350).attr("r", function(d) {return rscale(d.avg);})
+        .transition()
+        .duration(350)
+        .delay(350)
+        .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
+        .attr("cy", function(d) {return projection([d.lon, d.lat])[1];});
   });
-  },2000);
+  },1150);
 }
 
 function showFnd() {
@@ -118,29 +128,38 @@ function showFnd() {
   setTimeout(function() {chartFnd();},1050);
   $('#chart').slideDown(1200);
 
-  var rscale = d3.scale.linear().domain([750000,1592642241]).range([10,125]);
-  $('circle').remove();
-  d3.csv("data.csv", function(data) {
-    svg.selectAll("circle").data(data).enter().append("circle")
-    .on("mouseover", function(d) {
-        d3.select(this).style("stroke", "rgb(71,158,123)");
-        d3.select("#map_info")
-          .style("left", (d3.event.pageX) + "px")
-          .style("top", (d3.event.pageY) + "px");
-        d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Funding: "+"$"+d.fnd).classed("hidden", false);
-      })
-      .on("mouseout", function() {
-        d3.select(this).style("stroke", "white");
-        d3.select("#map_info").classed("hidden", true);
-      })
-    .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
-    .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
-    .style("fill", "hsla(170, 45%, 65%,0.35)")
-    .style("stroke", "white")
-    .style("stroke-width", "2")
-    .transition().duration(1500)
-    .attr("r", function(d) {return rscale(d.fnd);});
-  });
+  d3.selectAll($('circle')).transition().duration(350)
+  .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
+  setTimeout(function() {$('circle').remove();},1150);
+
+  setTimeout(function() {
+    var rscale = d3.scale.linear().domain([750000,1592642241]).range([10,125]);
+    d3.csv("data.csv", function(data) {
+      svg.selectAll("circle").data(data).enter().append("circle")
+        .on("mouseover", function(d) {
+          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select("#map_info")
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY) + "px");
+          d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Funding: "+"$"+d.fnd).classed("hidden", false);
+        })
+        .on("mouseout", function() {
+          d3.select(this).style("stroke", "white");
+          d3.select("#map_info").classed("hidden", true);
+        })
+        .attr("cx",w/1.75).attr("cy",h/2)
+        .attr("r","5")
+        .style("fill", "hsla(170, 45%, 65%,0.35)")
+        .style("stroke", "white")
+        .style("stroke-width", "2")
+        .transition().duration(350).attr("r", function(d) {return rscale(d.fnd);})
+        .transition()
+        .duration(350)
+        .delay(350)
+        .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
+        .attr("cy", function(d) {return projection([d.lon, d.lat])[1];});
+    });
+  },1150);
 }
 
 function showExt() {
@@ -151,28 +170,36 @@ function showExt() {
   setTimeout(function() {chartExt();},1050);
   $('#chart').slideDown(1200);
 
+  d3.selectAll($('circle')).transition().duration(350)
+  .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
+  setTimeout(function() {$('circle').remove();},1150);
+
   var rscale = d3.scale.linear().domain([500000,1245658100]).range([10,110]);
-  $('circle').remove();
-  d3.csv("../data.csv", function(data) {
-    svg.selectAll("circle").data(data).enter().append("circle")
-    .on("mouseover", function(d) {
-        d3.select(this).style("stroke", "rgb(71,158,123)");
-        d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
-        d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Exit Value: "+"$"+d.ext).classed("hidden", false);
-      })
-    .on("mouseout", function() {
-        d3.select(this).style("stroke", "white");
-        d3.select("#map_info").classed("hidden", true);
-      })
-    .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
-    .attr("cy", function(d) {return projection([d.lon, d.lat])[1];})
-    .attr("transform", "translate(0,0)")
-    .style("fill", "hsla(170, 45%, 65%,0.35)")
-    .style("stroke", "white")
-    .style("stroke-width", "2")
-    .transition().duration(1500)
-    .attr("r", function(d) {return rscale(d.fnd);});
-  });
+  setTimeout(function() {
+    d3.csv("../data.csv", function(data) {
+      svg.selectAll("circle").data(data).enter().append("circle")
+        .on("mouseover", function(d) {
+          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
+          d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Exit Value: "+"$"+d.ext).classed("hidden", false);
+        })
+        .on("mouseout", function() {
+          d3.select(this).style("stroke", "white");
+          d3.select("#map_info").classed("hidden", true);
+        })
+        .attr("cx",w/1.75).attr("cy",h/2)
+        .attr("r","5")
+        .style("fill", "hsla(170, 45%, 65%,0.35)")
+        .style("stroke", "white")
+        .style("stroke-width", "2")
+        .transition().duration(350).attr("r", function(d) {return rscale(d.ext);})
+        .transition()
+        .duration(350)
+        .delay(350)
+        .attr("cx", function(d) {return projection([d.lon, d.lat])[0];})
+        .attr("cy", function(d) {return projection([d.lon, d.lat])[1];});
+    });
+  },1150);
 }
 
 function chartComp() {
