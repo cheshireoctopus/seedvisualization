@@ -1,5 +1,5 @@
 $(function() {
-  w = ($('body').width() * 0.75);
+  w = ($('#container').width() * 0.73);
   h = 600;
   svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
   map();
@@ -59,7 +59,7 @@ function showComp() {
       .style("stroke", "white")
       .style("stroke-width", "2")
       .transition()
-      .duration(1500)
+      .duration(750)
       .attr("r", function(d) {return rscale(d.comp);});
   });
   $('.btn').attr("disabled", false);
@@ -124,7 +124,7 @@ function showFnd() {
 }
 
 function showExt() {
-  var rscale = d3.scale.linear().domain([500000,1245658100]).range([15,150]);
+  var rscale = d3.scale.linear().domain([500000,1245658100]).range([15,135]);
   $('circle').remove();
   d3.csv("../data.csv", function(data) {
     svg.selectAll("circle").data(data).enter().append("circle")
@@ -161,58 +161,49 @@ function chart() {
     var w = ($('body').width() * 0.25),
           h = ($('body').width() * 0.25),
           r = ($('body').width() * 0.10),
-          // color = d3.scale.category20c();
           color = d3.scale.ordinal()
-            .range(["rgba(241,242,242,1)","rgba(180,253,240,1)","rgba(130,251,231,1)","rgba(116,214,198,1)",
-              "rgba(31,249,212,1)","rgba(5,223,187,1)","rgba(40,138,121,1)","rgba(3,124,104,1)","rgba(161,170,168,1)",
-              "rgba(60,66,65,1)"]);
+            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
 
-    var vis = d3.select("#chart")
+    var chart = d3.select("#chart")
       .append("svg:svg")
       .data([data])
           .attr("width", w)
           .attr("height", h)
       .append("svg:g")
-          .attr("transform", "translate("+w/1.90+","+h/2+")");
+          .attr("transform", "translate("+w/2+","+h/2+")");
 
     var arc = d3.svg.arc()
-        .innerRadius(90)
-        .outerRadius(r);
+        .innerRadius(120)
+        .outerRadius(r+20);
 
     var arcOver = d3.svg.arc()
-        .innerRadius(95)
-        .outerRadius(r + 25);
+        .innerRadius(122)
+        .outerRadius(r + 30);
 
     var pie = d3.layout.pie().value(function(d) {return d.companies;});
 
-    var arcs = vis.selectAll("g.slice")
+    var arcs = chart.selectAll("g.slice")
         .data(pie)
         .enter()
             .append("svg:g")
                 .attr("class", "slice")
                 .on("mouseover", function(d) {
-                    d3.select(this).select("path").transition()
-                       .duration(200)
-                       .attr("d", arcOver);
-
+                    d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
                     centerText.text( d3.select(this).datum().data.name);
                     centerText2.text( d3.select(this).datum().data.companies);
                 })
                 .on("mouseout", function(d) {
-                    d3.select(this).select("path").transition()
-                       .duration(200)
-                       .attr("d", arc);
-
-                    centerText.text( "" );
+                    d3.select(this).select("path").transition().duration(200).attr("d", arc);
+                    centerText.text("");
                     centerText2.text("");
                 });
 
-    var centerText = vis.append("text")
+    var centerText = chart.append("text")
         .attr("dy", "1%")
         .attr("fill","white")
         .style("text-anchor", "middle");
 
-    var centerText2 = vis.append("text")
+    var centerText2 = chart.append("text")
         .attr("dy", "10%")
         .attr("fill","white")
         .style("text-anchor", "middle");

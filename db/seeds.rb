@@ -40,7 +40,7 @@ db = [
 ["Women Innovate Mobile",  "New York",  "NY", 40.7127, -74.0059,  4, 0, 750000,  187500,  "http://wim.co/"],
 ["DreamIT Ventures - Philadelphia",  "Philadelphia",  "PA",  39.95, -75.1700,  63,  500000,  80815000,  1282777, "http://www.dreamitventures.com/"],
 ["AlphaLab", "Pittsburgh",  "PA",  40.4417, -80.0000,  66,  0, 13920310,  210913,  "http://alphalab.org/"],
-["Portland Incubator Experiment (PIE)",  "Portland",  "OR",  45.52, -122.6819, 22,  0, 32826000,  1492090, "http://www.piepdx.com/"],
+["Portland Incubator Experiment",  "Portland",  "OR",  45.52, -122.6819, 22,  0, 32826000,  1492090, "http://www.piepdx.com/"],
 ["Portland Seed Fund", "Portland",  "OR",  45.52, -122.6819, 23,  0, 17522979,  761868,  "http://www.portlandseedfund.com/"],
 ["Betaspring", "Providence",  "RI",  41.8236, -71.4222,  71,  14000000,  15565000,  219225,  "http://www.betaspring.com/"],
 ["TechStars Cloud",  "San Antonio", "TX",  29.4167, -98.5, 11,  0, 22834000,  2075818, "http://www.techstars.com/cloud/"],

@@ -1,52 +1,69 @@
 body {
   font-family: helvetica;
-  margin: auto;
-  margin-top: 0;
-  width: 90%;
+  margin: 0;
   background: black;
 }
 
+/*BEGIN: Header*/
 header {
+  width: 100%;
   color: white;
+  background: rgba(125,205,192,1);
+  margin-bottom: 1%;
 }
 
-h1 {
-  text-align: center;
+header h1 {
+  display: inline-block;
+  border: 1px solid white;
+  padding: 0 15% 0 2.7%;
 }
 
 #logo {
-  color: rgba(125,205,192,1);
+  color: black;
 }
 
 .btn {
-  padding: 15px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
 #map_nav {
-  text-align: center;
-  width: 50%;
-  margin: auto;
-  margin-bottom: 2%;
-}
-
-#chart {
+  border: 1px solid white;
   display: inline-block;
-  border: 1px solid black;
+}
+/*END: Header*/
+/*BEGIN: Container*/
+#container {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 0;
+}
+/*END: Container*/
+/*BEGIN: Aside*/
+aside {
+  float: left;
+  width: 25%;
+  display: block;
 }
 
 #chart {
-  width: 25%;
+  /*border: 1px solid white;*/
 }
 
+#stats {
+  /*border: 1px solid white;*/
+}
+
+#stats h1{
+  color: white;
+}
+/*END: Aside*/
+/*BEGIN: Map*/
 #map {
   float: right;
   width: 74%;
-  border: 1px solid black;
-}
-
-svg {
+  /*border: 1px solid white;*/
 }
 
 #map_info {
@@ -61,5 +78,18 @@ svg {
 #map_info.hidden {
   display: none;
 }
+/*END: Map*/
+/*BEGIN: Footer*/
+footer {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  color: rgba(125,205,192,1);
+}
+/*END: Footer*/
 
-
+/*CLEAR*/
+.clear {
+  clear: both;
+}
