@@ -37,7 +37,6 @@ header h1 {
 #container {
   width: 95%;
   margin: auto;
-  margin-bottom: 0;
 }
 /*END: Container*/
 /*BEGIN: Aside*/
@@ -48,11 +47,11 @@ aside {
 }
 
 #chart {
-  /*border: 1px solid white;*/
+  border: 1px solid white;
 }
 
 #stats {
-  /*border: 1px solid white;*/
+  border: 1px solid white;
 }
 
 #stats h1{

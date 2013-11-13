@@ -3,7 +3,6 @@ $(function() {
   h = 600;
   svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
   map();
-  chart();
   setTimeout(function() {showComp();},1);
   $('#comp').on('click', showComp);
   $('#avg').on('click', showAvg);
@@ -16,8 +15,8 @@ $(function() {
 function map() {
       //Define map projection
       projection = d3.geo.albersUsa()
-      .scale(1100)
-      .translate([550,310]);
+      .scale(w*1.15)
+      .translate([565,310]);
 
       //Define path generator
       path = d3.geo.path()
@@ -64,6 +63,8 @@ function showComp() {
   });
   $('.btn').attr("disabled", false);
   $('#comp').attr("disabled", true);
+  $('#chart').empty();
+  chartComp();
 }
 
 function showAvg() {
@@ -93,6 +94,8 @@ function showAvg() {
   });
   $('.btn').attr("disabled", false);
   $('#avg').attr("disabled", true);
+  $('#chart').empty();
+  chartAvg();
 }
 
 function showFnd() {
@@ -121,6 +124,8 @@ function showFnd() {
   });
   $('.btn').attr("disabled", false);
   $('#fnd').attr("disabled", true);
+  $('#chart').empty();
+  chartFnd();
 }
 
 function showExt() {
@@ -148,16 +153,17 @@ function showExt() {
   });
   $('.btn').attr("disabled", false);
   $('#ext').attr("disabled", true);
+  $('#chart').empty();
+  chartExt();
 }
 
-function chart() {
+function chartComp() {
   $.ajax({
     url: '/',
     method: 'GET',
     dataType: 'json'
   })
   .done(function(data){
-
     var w = ($('body').width() * 0.25),
           h = ($('body').width() * 0.25),
           r = ($('body').width() * 0.10),
@@ -191,6 +197,201 @@ function chart() {
                     d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
                     centerText.text( d3.select(this).datum().data.name);
                     centerText2.text( d3.select(this).datum().data.companies);
+                })
+                .on("mouseout", function(d) {
+                    d3.select(this).select("path").transition().duration(200).attr("d", arc);
+                    centerText.text("");
+                    centerText2.text("");
+                });
+
+    var centerText = chart.append("text")
+        .attr("dy", "1%")
+        .attr("fill","white")
+        .style("text-anchor", "middle");
+
+    var centerText2 = chart.append("text")
+        .attr("dy", "10%")
+        .attr("fill","white")
+        .style("text-anchor", "middle");
+
+
+    arcs.append("svg:path")
+        .attr("fill", function(d, i) { return color(i); } )
+        .attr("d", arc);
+  });
+}
+
+function chartAvg() {
+  $.ajax({
+    url: '/',
+    method: 'GET',
+    dataType: 'json'
+  })
+  .done(function(data){
+
+    var w = ($('body').width() * 0.25),
+          h = ($('body').width() * 0.25),
+          r = ($('body').width() * 0.10),
+          color = d3.scale.ordinal()
+            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+
+    var chart = d3.select("#chart")
+      .append("svg:svg")
+      .data([data])
+          .attr("width", w)
+          .attr("height", h)
+      .append("svg:g")
+          .attr("transform", "translate("+w/2+","+h/2+")");
+
+    var arc = d3.svg.arc()
+        .innerRadius(120)
+        .outerRadius(r+20);
+
+    var arcOver = d3.svg.arc()
+        .innerRadius(122)
+        .outerRadius(r + 30);
+
+    var pie = d3.layout.pie().value(function(d) {return d.average;});
+
+    var arcs = chart.selectAll("g.slice")
+        .data(pie)
+        .enter()
+            .append("svg:g")
+                .attr("class", "slice")
+                .on("mouseover", function(d) {
+                    d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
+                    centerText.text( d3.select(this).datum().data.name);
+                    centerText2.text( d3.select(this).datum().data.average);
+                })
+                .on("mouseout", function(d) {
+                    d3.select(this).select("path").transition().duration(200).attr("d", arc);
+                    centerText.text("");
+                    centerText2.text("");
+                });
+
+    var centerText = chart.append("text")
+        .attr("dy", "1%")
+        .attr("fill","white")
+        .style("text-anchor", "middle");
+
+    var centerText2 = chart.append("text")
+        .attr("dy", "10%")
+        .attr("fill","white")
+        .style("text-anchor", "middle");
+
+
+    arcs.append("svg:path")
+        .attr("fill", function(d, i) { return color(i); } )
+        .attr("d", arc);
+  });
+}
+
+function chartFnd() {
+  $.ajax({
+    url: '/',
+    method: 'GET',
+    dataType: 'json'
+  })
+  .done(function(data){
+
+    var w = ($('body').width() * 0.25),
+          h = ($('body').width() * 0.25),
+          r = ($('body').width() * 0.10),
+          color = d3.scale.ordinal()
+            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+
+    var chart = d3.select("#chart")
+      .append("svg:svg")
+      .data([data])
+          .attr("width", w)
+          .attr("height", h)
+      .append("svg:g")
+          .attr("transform", "translate("+w/2+","+h/2+")");
+
+    var arc = d3.svg.arc()
+        .innerRadius(120)
+        .outerRadius(r+20);
+
+    var arcOver = d3.svg.arc()
+        .innerRadius(122)
+        .outerRadius(r + 30);
+
+    var pie = d3.layout.pie().value(function(d) {return d.funding;});
+
+    var arcs = chart.selectAll("g.slice")
+        .data(pie)
+        .enter()
+            .append("svg:g")
+                .attr("class", "slice")
+                .on("mouseover", function(d) {
+                    d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
+                    centerText.text( d3.select(this).datum().data.name);
+                    centerText2.text( d3.select(this).datum().data.funding);
+                })
+                .on("mouseout", function(d) {
+                    d3.select(this).select("path").transition().duration(200).attr("d", arc);
+                    centerText.text("");
+                    centerText2.text("");
+                });
+
+    var centerText = chart.append("text")
+        .attr("dy", "1%")
+        .attr("fill","white")
+        .style("text-anchor", "middle");
+
+    var centerText2 = chart.append("text")
+        .attr("dy", "10%")
+        .attr("fill","white")
+        .style("text-anchor", "middle");
+
+
+    arcs.append("svg:path")
+        .attr("fill", function(d, i) { return color(i); } )
+        .attr("d", arc);
+  });
+}
+
+function chartExt() {
+  $.ajax({
+    url: '/',
+    method: 'GET',
+    dataType: 'json'
+  })
+  .done(function(data){
+
+    var w = ($('body').width() * 0.25),
+          h = ($('body').width() * 0.25),
+          r = ($('body').width() * 0.10),
+          color = d3.scale.ordinal()
+            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+
+    var chart = d3.select("#chart")
+      .append("svg:svg")
+      .data([data])
+          .attr("width", w)
+          .attr("height", h)
+      .append("svg:g")
+          .attr("transform", "translate("+w/2+","+h/2+")");
+
+    var arc = d3.svg.arc()
+        .innerRadius(120)
+        .outerRadius(r+20);
+
+    var arcOver = d3.svg.arc()
+        .innerRadius(122)
+        .outerRadius(r + 30);
+
+    var pie = d3.layout.pie().value(function(d) {return d.exits;});
+
+    var arcs = chart.selectAll("g.slice")
+        .data(pie)
+        .enter()
+            .append("svg:g")
+                .attr("class", "slice")
+                .on("mouseover", function(d) {
+                    d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
+                    centerText.text( d3.select(this).datum().data.name);
+                    centerText2.text( d3.select(this).datum().data.exits);
                 })
                 .on("mouseout", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arc);

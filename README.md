@@ -7,6 +7,7 @@ this web application provides a visualized perspective of the top-50 accelerator
 * Ruby on Rails
 * HTML5/CSS3
 * Javascript + JQuery + AJAX
+* PostgreSQL
 * D3.js
 
 Check it out @ [https://accelvis.herokuapp.com/](https://accelvis.herokuapp.com/).
