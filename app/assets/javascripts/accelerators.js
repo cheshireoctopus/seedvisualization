@@ -1,13 +1,12 @@
 $(function() {
   w = ($('#container').width() * 0.73);
   h = (w/1.66);
-
   map();
-  setTimeout(function() {showComp();},2550);
-  $('#comp').on('click', showComp);
-  $('#avg').on('click', showAvg);
-  $('#fnd').on('click', showFnd);
-  $('#ext').on('click', showExt);
+  setTimeout(function() {mapComp();},1000);
+  $('#comp').on('click', mapComp);
+  $('#avg').on('click', mapAvg);
+  $('#fnd').on('click', mapFnd);
+  $('#ext').on('click', mapExt);
   $('svg').css('cursor', 'pointer');
   $('#about_link').css('cursor', 'pointer').on('click', about);
 });
@@ -39,7 +38,10 @@ function map() {
   });
 }
 
-function showComp() {
+//////////////////////////
+//BEGIN:MAP FUNCTIONS//
+//////////////////////////
+function mapComp() {
   $('.btn').attr("disabled", false);
   $('#comp').attr("disabled", true);
   $('#chart').slideUp(1000);
@@ -78,8 +80,7 @@ function showComp() {
     });
   },1150);
 }
-
-function showAvg() {
+function mapAvg() {
   $('.btn').attr("disabled", false);
   $('#avg').attr("disabled", true);
   $('#chart').slideUp(1000);
@@ -119,8 +120,7 @@ function showAvg() {
   });
   },1150);
 }
-
-function showFnd() {
+function mapFnd() {
   $('.btn').attr("disabled", false);
   $('#fnd').attr("disabled", true);
   $('#chart').slideUp(1000);
@@ -161,8 +161,7 @@ function showFnd() {
     });
   },1150);
 }
-
-function showExt() {
+function mapExt() {
   $('.btn').attr("disabled", false);
   $('#ext').attr("disabled", true);
   $('#chart').slideUp(1000);
@@ -202,6 +201,9 @@ function showExt() {
   },1150);
 }
 
+////////////////////////////
+//BEGIN:CHART FUNCTIONS//
+////////////////////////////
 function chartComp() {
   $.ajax({
     url: '/',
