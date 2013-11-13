@@ -1,13 +1,21 @@
 body {
-  width: 85%;
-  margin: auto;
-  background: black;
-  color:white;
   font-family: helvetica;
+  margin: auto;
+  margin-top: 0;
+  width: 90%;
+  background: black;
+}
+
+header {
+  color: white;
 }
 
 h1 {
   text-align: center;
+}
+
+#logo {
+  color: rgba(125,205,192,1);
 }
 
 .btn {
@@ -23,13 +31,22 @@ h1 {
   margin-bottom: 2%;
 }
 
-#map_div {
-  background: black;
+#chart {
+  display: inline-block;
+  border: 1px solid black;
+}
+
+#chart {
+  width: 25%;
+}
+
+#map {
+  float: right;
+  width: 74%;
+  border: 1px solid black;
 }
 
 svg {
-  /*border: 1px solid black;*/
-  background: black;
 }
 
 #map_info {
@@ -38,8 +55,11 @@ svg {
   background: white;
   padding: 10px;
   border-radius: 5px;
+  color: black;
 }
 
 #map_info.hidden {
   display: none;
 }
+
+
