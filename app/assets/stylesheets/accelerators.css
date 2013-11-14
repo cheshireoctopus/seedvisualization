@@ -109,6 +109,7 @@ aside {
   padding: 10px;
   border-radius: 2px;
   color: black;
+  pointer-events: none;
 }
 
 #map_info.hidden {
