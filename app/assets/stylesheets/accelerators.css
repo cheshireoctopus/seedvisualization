@@ -2,6 +2,8 @@ body {
   font-family: helvetica;
   background: rgb(14,14,14);
   margin: 0;
+  vertical-align: baseline;
+  overflow: hidden;
 }
 
 /*BEGIN: Header*/
@@ -103,14 +105,21 @@ aside {
 /*BEGIN: Footer*/
 footer {
   width: 100%;
-  bottom: 0;
-  height: 5%;
+  bottom: -16%;
+  height: 20%;
   position: absolute;
   text-align: center;
-  color: rgba(125,205,192,1);
-  border-top: 1px solid white;
 }
 
+#about_link {
+  color: rgba(125,205,192,1);
+  /*padding-bottom: 5px;*/
+}
+
+#about {
+  background: rgba(125,205,192,1);
+  height: 100%;
+}
 /*END: Footer*/
 
 /*CLEAR*/

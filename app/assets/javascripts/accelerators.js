@@ -9,8 +9,9 @@ $(function() {
   $('#fnd').on('click', mapFnd);
   $('#ext').on('click', mapExt);
   $('svg').css('cursor', 'pointer');
-  $('footer').css('cursor', 'pointer').on('mouseover', about).on('mouseout',aboutHide);
-});
+  $('footer').hover(function() {$(this).stop().animate({bottom: '0%'},350,'easeInQuart');},
+   function() {$(this).stop().animate({bottom: '-16%'},1250,'easeOutBounce');});
+  });
 
 function map() {
   svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
@@ -463,16 +464,7 @@ function chartExt() {
   });
 }
 
-
 function about() {
-  $('footer').animate({
-    height: "15%"
-  },500);
-}
 
-function aboutHide() {
-  console.log('good bye');
-  $('footer').animate({
-    height: "3%"
-  },500);
-}
+ }
+
