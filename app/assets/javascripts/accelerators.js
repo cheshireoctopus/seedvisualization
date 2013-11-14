@@ -198,7 +198,7 @@ function mapExt() {
     $('#stats_title').html("Exit Valuations");
     $('#stat1').html("Total: $1,723,558,100");
     $('#stat2').html("Y Combinator's Percentage: 72%");
-    $('.stats').fadeIn();},3000);
+    $('.stats').fadeIn();},2500);
 
   d3.selectAll($('circle')).transition().duration(350)
   .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");

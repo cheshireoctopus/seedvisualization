@@ -1,5 +1,5 @@
 body {
-  font-family: helvetica;
+  font-family: "Roboto", sans-serif;
   background: rgb(14,14,14);
   margin: 0;
   vertical-align: baseline;
@@ -8,6 +8,7 @@ body {
 
 /*BEGIN: Header*/
 header {
+  font-weight: 700;
   top:0;
   left:0;
   right:0;
@@ -20,7 +21,7 @@ header {
 
 #logo {
   position: absolute;
-  padding-left: 3.5%;
+  padding-left: 2%;
   font-size: 200%;
   top:4px;
 }
@@ -40,6 +41,8 @@ nav {
 }
 
 .btn {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   cursor: pointer;
   background: rgba(125,205,192,1);
   border: none;
@@ -79,11 +82,13 @@ aside {
   border-bottom: 5px solid rgb(230,92,40);
 }
 
-#stats {
-}
-
 #stats_title {
   font-size: 200%;
+}
+
+#stat1, #stat2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 }
 
 .stats {
@@ -127,6 +132,8 @@ footer {
 }
 
 #about {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   background: rgba(125,205,192,1);
   height: 100%;
   font-size: 100%;
