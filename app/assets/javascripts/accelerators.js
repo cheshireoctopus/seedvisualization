@@ -3,12 +3,13 @@ $(function() {
   h = (w/1.66);
   map();
   setTimeout(function() {mapComp();},1000);
+  $('#chart').hide().fadeIn(2000);
   $('#comp').on('click', mapComp);
   $('#avg').on('click', mapAvg);
   $('#fnd').on('click', mapFnd);
   $('#ext').on('click', mapExt);
   $('svg').css('cursor', 'pointer');
-  $('#about_link').css('cursor', 'pointer').on('click', about);
+  $('footer').css('cursor', 'pointer').on('mouseover', about).on('mouseout',aboutHide);
 });
 
 function map() {
@@ -462,6 +463,16 @@ function chartExt() {
   });
 }
 
+
 function about() {
-  alert("hello");
+  $('footer').animate({
+    height: "15%"
+  },500);
+}
+
+function aboutHide() {
+  console.log('good bye');
+  $('footer').animate({
+    height: "3%"
+  },500);
 }
