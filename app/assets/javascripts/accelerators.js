@@ -1,6 +1,7 @@
 $(function() {
   w = ($('#container').width() * 0.73);
   h = (w/1.66);
+  color = d3.scale.ordinal().range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)","rgb(230,92,40)"]);
   map();
   setTimeout(function() {mapComp();},1000);
   $('#chart').hide().fadeIn(2000);
@@ -8,9 +9,9 @@ $(function() {
   $('#avg').on('click', mapAvg);
   $('#fnd').on('click', mapFnd);
   $('#ext').on('click', mapExt);
-  $('svg').css('cursor', 'pointer');
+  $('svg, #about_link, #chart').css('cursor', 'pointer');
   $('footer').hover(function() {$(this).stop().animate({bottom: '0%'},350,'easeInQuart');},
-   function() {$(this).stop().animate({bottom: '-16%'},1250,'easeOutBounce');});
+   function() {$(this).stop().animate({bottom: '-14%'},1250,'easeOutBounce');});
   });
 
 function map() {
@@ -51,6 +52,13 @@ function mapComp() {
   setTimeout(function() {chartComp();},1050);
   $('#chart').slideDown(1200);
 
+  $('.stats').fadeOut();
+  setTimeout(function() {
+    $('#stats_title').html("Number of Companies");
+    $('#stat1').html("Total: 1932");
+    $('#stat2').html("Y Combinator's Percentage: 29%");
+    $('.stats').fadeIn();},2500);
+
   d3.selectAll($('circle')).transition().duration(350)
   .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
   setTimeout(function() {$('circle').remove();},1150);
@@ -60,7 +68,7 @@ function mapComp() {
     d3.csv("data.csv", function(data) {
         svg.selectAll("circle").data(data).enter().append("circle")
         .on("mouseover", function(d) {
-          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select(this).style("stroke", "rgba(125,205,192,1)");
           d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
           d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Companies: "+d.comp).classed("hidden", false);
         })
@@ -88,7 +96,14 @@ function mapAvg() {
   $('#chart').slideUp(1000);
   setTimeout(function() {$('#chart svg').remove();},1025);
   setTimeout(function() {chartAvg();},1050);
-  $('#chart').slideDown(1200);
+  $('#chart').slideDown({duration:1200,easing:'easeOutSine'});
+
+  $('.stats').fadeOut();
+  setTimeout(function() {
+    $('#stats_title').html("Number of Companies");
+    $('#stat1').html("Average Funding: $824,761");
+    $('#stat2').html("Y Combinator Avg: $2,813,855");
+    $('.stats').fadeIn();},2500);
 
   d3.selectAll($('circle')).transition().duration(350)
   .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
@@ -98,7 +113,7 @@ function mapAvg() {
   d3.csv("data.csv", function(data) {
       svg.selectAll("circle").data(data).enter().append("circle")
       .on("mouseover", function(d) {
-          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select(this).style("stroke", "rgba(125,205,192,1)");
           d3.select("#map_info")
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY) + "px");
@@ -130,6 +145,13 @@ function mapFnd() {
   setTimeout(function() {chartFnd();},1050);
   $('#chart').slideDown(1200);
 
+  $('.stats').fadeOut();
+  setTimeout(function() {
+    $('#stats_title').html("Total Funding");
+    $('#stat1').html("Total:  $2,729,339,599");
+    $('#stat2').html("Y Combinator's Percentage: 58%");
+    $('.stats').fadeIn();},2500);
+
   d3.selectAll($('circle')).transition().duration(350)
   .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
   setTimeout(function() {$('circle').remove();},1150);
@@ -139,7 +161,7 @@ function mapFnd() {
     d3.csv("data.csv", function(data) {
       svg.selectAll("circle").data(data).enter().append("circle")
         .on("mouseover", function(d) {
-          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select(this).style("stroke", "rgba(125,205,192,1)");
           d3.select("#map_info")
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY) + "px");
@@ -171,6 +193,13 @@ function mapExt() {
   setTimeout(function() {chartExt();},1050);
   $('#chart').slideDown(1200);
 
+  $('.stats').fadeOut();
+   setTimeout(function() {
+    $('#stats_title').html("Exit Valuations");
+    $('#stat1').html("Total: $1,723,558,100");
+    $('#stat2').html("Y Combinator's Percentage: 72%");
+    $('.stats').fadeIn();},3000);
+
   d3.selectAll($('circle')).transition().duration(350)
   .attr("cx",w/1.75).attr("cy",h/2).transition().duration(350).delay(350).attr("r","5");
   setTimeout(function() {$('circle').remove();},1150);
@@ -180,7 +209,7 @@ function mapExt() {
     d3.csv("../data.csv", function(data) {
       svg.selectAll("circle").data(data).enter().append("circle")
         .on("mouseover", function(d) {
-          d3.select(this).style("stroke", "rgb(71,158,123)");
+          d3.select(this).style("stroke", "rgba(125,205,192,1)");
           d3.select("#map_info").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
           d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Exit Value: "+"$"+d.ext).classed("hidden", false);
         })
@@ -215,9 +244,7 @@ function chartComp() {
   .done(function(data){
     var w = ($('body').width() * 0.25),
           h = ($('body').width() * 0.25),
-          r = ($('body').width() * 0.10),
-          color = d3.scale.ordinal()
-            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+          r = ($('body').width() * 0.10);
 
     var chart = d3.select("#chart")
       .append("svg:svg")
@@ -225,7 +252,7 @@ function chartComp() {
           .attr("width", w)
           .attr("height", h)
       .append("svg:g")
-          .attr("transform", "translate("+w/2+","+h/2+")");
+          .attr("transform", "translate("+w/2.1+","+h/2+")");
 
     var arc = d3.svg.arc()
         .innerRadius(120)
@@ -268,7 +295,6 @@ function chartComp() {
         .attr("d", arc);
   });
 }
-
 function chartAvg() {
   $.ajax({
     url: '/',
@@ -279,9 +305,7 @@ function chartAvg() {
 
     var w = ($('body').width() * 0.25),
           h = ($('body').width() * 0.25),
-          r = ($('body').width() * 0.10),
-          color = d3.scale.ordinal()
-            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+          r = ($('body').width() * 0.10);
 
     var chart = d3.select("#chart")
       .append("svg:svg")
@@ -289,7 +313,7 @@ function chartAvg() {
           .attr("width", w)
           .attr("height", h)
       .append("svg:g")
-          .attr("transform", "translate("+w/2+","+h/2+")");
+          .attr("transform", "translate("+w/2.1+","+h/2+")");
 
     var arc = d3.svg.arc()
         .innerRadius(120)
@@ -308,8 +332,8 @@ function chartAvg() {
                 .attr("class", "slice")
                 .on("mouseover", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
-                    centerText.text( d3.select(this).datum().data.name);
-                    centerText2.text( d3.select(this).datum().data.average);
+                    centerText.text(d3.select(this).datum().data.name);
+                    centerText2.text("$"+d3.select(this).datum().data.average);
                 })
                 .on("mouseout", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arc);
@@ -333,7 +357,6 @@ function chartAvg() {
         .attr("d", arc);
   });
 }
-
 function chartFnd() {
   $.ajax({
     url: '/',
@@ -344,9 +367,7 @@ function chartFnd() {
 
     var w = ($('body').width() * 0.25),
           h = ($('body').width() * 0.25),
-          r = ($('body').width() * 0.10),
-          color = d3.scale.ordinal()
-            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+          r = ($('body').width() * 0.10);
 
     var chart = d3.select("#chart")
       .append("svg:svg")
@@ -354,7 +375,7 @@ function chartFnd() {
           .attr("width", w)
           .attr("height", h)
       .append("svg:g")
-          .attr("transform", "translate("+w/2+","+h/2+")");
+          .attr("transform", "translate("+w/2.1+","+h/2+")");
 
     var arc = d3.svg.arc()
         .innerRadius(120)
@@ -373,8 +394,8 @@ function chartFnd() {
                 .attr("class", "slice")
                 .on("mouseover", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
-                    centerText.text( d3.select(this).datum().data.name);
-                    centerText2.text( d3.select(this).datum().data.funding);
+                    centerText.text(d3.select(this).datum().data.name);
+                    centerText2.text("$"+d3.select(this).datum().data.funding);
                 })
                 .on("mouseout", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arc);
@@ -398,7 +419,6 @@ function chartFnd() {
         .attr("d", arc);
   });
 }
-
 function chartExt() {
   $.ajax({
     url: '/',
@@ -409,9 +429,7 @@ function chartExt() {
 
     var w = ($('body').width() * 0.25),
           h = ($('body').width() * 0.25),
-          r = ($('body').width() * 0.10),
-          color = d3.scale.ordinal()
-            .range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)"]);
+          r = ($('body').width() * 0.10);
 
     var chart = d3.select("#chart")
       .append("svg:svg")
@@ -419,7 +437,7 @@ function chartExt() {
           .attr("width", w)
           .attr("height", h)
       .append("svg:g")
-          .attr("transform", "translate("+w/2+","+h/2+")");
+          .attr("transform", "translate("+w/2.1+","+h/2+")");
 
     var arc = d3.svg.arc()
         .innerRadius(120)
@@ -438,8 +456,8 @@ function chartExt() {
                 .attr("class", "slice")
                 .on("mouseover", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arcOver);
-                    centerText.text( d3.select(this).datum().data.name);
-                    centerText2.text( d3.select(this).datum().data.exits);
+                    centerText.text(d3.select(this).datum().data.name);
+                    centerText2.text("$"+d3.select(this).datum().data.exits);
                 })
                 .on("mouseout", function(d) {
                     d3.select(this).select("path").transition().duration(200).attr("d", arc);
@@ -464,7 +482,4 @@ function chartExt() {
   });
 }
 
-function about() {
-
- }
 
