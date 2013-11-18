@@ -165,7 +165,7 @@ function mapFnd() {
           d3.select("#map_info")
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY) + "px");
-          d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Funding: "+"$"+d.fnd).classed("hidden", false);
+          d3.select("#map_info").html("<strong>"+d.city+", "+d.state+"</strong></br>Total Funding: "+d.fndc).classed("hidden", false);
         })
         .on("mouseout", function() {
           d3.select(this).style("stroke", "white");
@@ -206,7 +206,7 @@ function mapExt() {
 
   var rscale = d3.scale.linear().domain([500000,1245658100]).range([10,110]);
   setTimeout(function() {
-    d3.csv("../data.csv", function(data) {
+    d3.csv("data.csv", function(data) {
       svg.selectAll("circle").data(data).enter().append("circle")
         .on("mouseover", function(d) {
           d3.select(this).style("stroke", "rgba(125,205,192,1)");
