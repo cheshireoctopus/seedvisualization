@@ -120,21 +120,21 @@ aside {
 footer {
   width: 100%;
   bottom: -14%;
-  height: 18%;
+  height: 17%;
   position: absolute;
   text-align: center;
 }
 
 #about_link {
   color: rgba(125,205,192,1);
-  padding-bottom: 1%;
+  padding-bottom: 2%;
   display: block;
   font-size: 100%;
 }
 
 #about {
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   background: rgba(125,205,192,1);
   height: 100%;
   font-size: 100%;
@@ -146,6 +146,10 @@ footer {
   text-decoration: none;
   color: white;
   font-weight: bolder;
+}
+
+footer p {
+  padding-top: -5px;
 }
 
 #about p:nth-of-type(2) a {
