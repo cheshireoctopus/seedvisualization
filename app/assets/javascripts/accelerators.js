@@ -1,6 +1,6 @@
 $(function() {
-  w = ($('#container').width() * 0.73);
-  h = (w/1.66);
+  w = 960;
+  h = 530;
   color = d3.scale.ordinal().range(["rgba(241,242,242,1)","rgba(125,205,192,1)","rgb(83,83,83)","rgba(180,253,240,1)","rgb(230,92,40)"]);
   map();
   setTimeout(function() {mapComp();},1000);
@@ -12,14 +12,24 @@ $(function() {
   $('svg, #about_link, #chart').css('cursor', 'pointer');
   $('footer').hover(function() {$(this).stop().animate({bottom: '0%'},350,'easeInQuart');},
    function() {$(this).stop().animate({bottom: '-14%'},1250,'easeOutBounce');});
+  //Resive SVG
+  var svg_map = $("#svg_map"),
+        aspect = svg_map.width() / svg_map.height(),
+        container = svg_map.parent();
+        console.log(svg_map);
+  $(window).on("resize", function() {
+    console.log(aspect);
+    var targetWidth = container.width();
+    svg_map.attr("width", targetWidth);
+    svg_map.attr("height", Math.round(targetWidth/aspect));
+  }).trigger("resize");
   });
 
 function map() {
-  svg = d3.select("#map").append("svg").attr("width", w).attr("height", h);
+  svg = d3.select("#map").append("svg").attr("viewBox", "0 0 960 530").attr("width", w).attr("height", h).attr("id","svg_map");
   //Define map projection
   projection = d3.geo.albersUsa()
-    .scale((w/h)*w*0.70)
-    .translate([w/1.85,h/2]);
+    .translate([550,300]);
 
   //Define path generator
   path = d3.geo.path()
