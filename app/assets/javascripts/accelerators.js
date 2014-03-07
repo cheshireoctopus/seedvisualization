@@ -12,13 +12,11 @@ $(function() {
   $('svg, #about_link, #chart').css('cursor', 'pointer');
   $('footer').hover(function() {$(this).stop().animate({bottom: '0%'},350,'easeInQuart');},
    function() {$(this).stop().animate({bottom: '-14%'},1250,'easeOutBounce');});
-  //Resive SVG
+  //Resize svg_map
   var svg_map = $("#svg_map"),
         aspect = svg_map.width() / svg_map.height(),
         container = svg_map.parent();
-        console.log(svg_map);
   $(window).on("resize", function() {
-    console.log(aspect);
     var targetWidth = container.width();
     svg_map.attr("width", targetWidth);
     svg_map.attr("height", Math.round(targetWidth/aspect));
